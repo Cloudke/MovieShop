@@ -16,5 +16,7 @@ namespace Infrastructure.Data
         }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Crew> Crew { get; set; }
+        public DbSet<Cast> Cast { get; set; }
+
     }
 }
