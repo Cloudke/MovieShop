@@ -11,13 +11,16 @@ namespace ApplicationCore.Entities
    public class UserRole
     {
         [Key]
-        [ForeignKey("User")]
         [Column(Order= 1)]
         public int UserId { get; set; }
 
         [Key]
-        [ForeignKey("Role")]
         [Column(Order = 1)]
         public int RoleId { get; set; }
+
+        [ForeignKey("UserId")]
+        public User user { get; set; }
+        [ForeignKey("RoleId")]
+        public Role role { get; set; }
     }
 }
