@@ -25,6 +25,7 @@ namespace Infrastructure.Data
 
         public DbSet<Favorite> Favorite { get; set; }
         public DbSet<Review> Review { get; set; }
+        public DbSet<Purchase> Purchase { get; set; }
 
         public DbSet<User> User { get; set; }
         public DbSet<User> UserRole { get; set; }
