@@ -12,7 +12,7 @@ namespace ApplicationCore.Entities
     {
         public int Id { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(256)]
         [Required]
         public string Title { get; set; }
 #nullable enable

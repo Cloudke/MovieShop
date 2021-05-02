@@ -19,9 +19,11 @@ namespace ApplicationCore.Entities
         public int CrewId { get; set; }
 
         [Required]
+        [MaxLength(128)]
         public string Department { get; set; }
 
         [Required]
+        [MaxLength(128)]
         public string Job { get; set; }
 
         [ForeignKey("MovieId")]
