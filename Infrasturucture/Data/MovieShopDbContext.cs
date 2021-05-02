@@ -24,6 +24,7 @@ namespace Infrastructure.Data
         public DbSet<Trailer> Trailer { get; set; }
 
         public DbSet<Favorite> Favorite { get; set; }
+        public DbSet<Review> Review { get; set; }
 
         public DbSet<User> User { get; set; }
         public DbSet<User> UserRole { get; set; }
@@ -40,6 +41,9 @@ namespace Infrastructure.Data
                  .HasKey(m => new { m.MovieId, m.CastId });
             modelBuilder.Entity<UserRole>()
                 .HasKey(m => new { m.UserId, m.RoleId });
+            modelBuilder.Entity<Review>()
+                .HasKey(m => new { m.MovieId, m.UserId });
+
         }
 
     }
