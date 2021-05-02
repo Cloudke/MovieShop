@@ -19,6 +19,7 @@ namespace Infrastructure.Data
         public DbSet<Crew> Crew { get; set; }
         public DbSet<MovieCrew> MovieCrew { get; set; }
         public DbSet<Cast> Cast { get; set; }
+        public DbSet<MovieCast> MovieCast { get; set; }
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Role> Role { get; set; }
 
@@ -28,6 +29,8 @@ namespace Infrastructure.Data
                 .HasKey(m => new { m.MovieId, m.GenreId });
             modelBuilder.Entity<MovieCrew>()
                  .HasKey(m => new { m.MovieId, m.CrewId});
+            modelBuilder.Entity<MovieCast>()
+                 .HasKey(m => new { m.MovieId, m.CastId });
         }
 
     }
