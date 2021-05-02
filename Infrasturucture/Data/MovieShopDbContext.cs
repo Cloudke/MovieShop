@@ -14,14 +14,16 @@ namespace Infrastructure.Data
         {
 
         }
+        public DbSet<Movie> Movie { get; set; }
         public DbSet<Genre> Genre { get; set; }
         public DbSet<MovieGenre> MovieGenre { get; set; }
         public DbSet<Crew> Crew { get; set; }
         public DbSet<MovieCrew> MovieCrew { get; set; }
         public DbSet<Cast> Cast { get; set; }
         public DbSet<MovieCast> MovieCast { get; set; }
-        public DbSet<Movie> Movie { get; set; }
         public DbSet<Role> Role { get; set; }
+
+        public DbSet<Trailer> Trailer { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
