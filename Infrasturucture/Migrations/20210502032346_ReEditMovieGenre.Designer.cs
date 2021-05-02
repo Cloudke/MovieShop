@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210502032346_ReEditMovieGenre")]
+    partial class ReEditMovieGenre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,9 +222,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MovietId")
+                        .HasColumnType("int");
+
                     b.HasKey("MovieId", "GenreId");
 
                     b.HasIndex("GenreId");
+
+                    b.HasIndex("MovietId");
 
                     b.ToTable("MovieGenre");
                 });
@@ -389,9 +396,7 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("ApplicationCore.Entities.Movie", "movie")
                         .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovietId");
 
                     b.Navigation("genre");
 

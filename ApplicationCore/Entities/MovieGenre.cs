@@ -11,12 +11,17 @@ namespace ApplicationCore.Entities
     public class MovieGenre
     {
         [Key]
-        [ForeignKey("Movie")]
         [Column(Order = 1)]
         public int MovieId { get; set; }
+        
         [Key]
-        [ForeignKey("Genre")]
         [Column(Order = 1)]
         public int GenreId { get; set; }
+
+
+        [ForeignKey("MovieId")]
+        public Movie movie { get; set; }
+        [ForeignKey("GenreId")]
+        public Genre genre { get; set; }
     }
 }

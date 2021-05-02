@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MovieShopDbContext))]
-    partial class MovieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210502032900_DMovieGenre")]
+    partial class DMovieGenre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,21 +214,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("MovieCrew");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.MovieGenre", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MovieId", "GenreId");
-
-                    b.HasIndex("GenreId");
-
-                    b.ToTable("MovieGenre");
-                });
-
             modelBuilder.Entity("ApplicationCore.Entities.Purchase", b =>
                 {
                     b.Property<int>("Id")
@@ -377,25 +364,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("UserRole");
-                });
-
-            modelBuilder.Entity("ApplicationCore.Entities.MovieGenre", b =>
-                {
-                    b.HasOne("ApplicationCore.Entities.Genre", "genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ApplicationCore.Entities.Movie", "movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("genre");
-
-                    b.Navigation("movie");
                 });
 #pragma warning restore 612, 618
         }
