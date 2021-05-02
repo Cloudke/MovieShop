@@ -10,7 +10,6 @@ namespace ApplicationCore.Entities
     public class Purchase
     {
         public int Id { get; set; }
-        [ForeignKey("User")]
         public int UserId { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,9 +19,11 @@ namespace ApplicationCore.Entities
         public decimal TotalPrice { get; set; }
         public DateTime PurchaseDateTime { get; set; }
 
-        [ForeignKey("Movie")]
         public int MovieId { get; set; }
 
-
+        [ForeignKey("MovieId")]
+        public Movie movie { get; set; }
+        [ForeignKey("UserId")]
+        public User user { get; set; }
     }
 }
