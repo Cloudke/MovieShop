@@ -10,9 +10,16 @@ namespace ApplicationCore.Entities
     public class Favorite
     {
         public int Id { get; set; }
-        [ForeignKey("Movie")]
+
+
         public int MovieId { get; set; }
-        [ForeignKey("User")]
+
+
         public int UserId { get; set; }
+
+        [ForeignKey("MovieId")]
+        public Movie movie { get; set; }
+        [ForeignKey("UserId")]
+        public User user { get; set; }
     }
 }

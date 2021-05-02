@@ -11,16 +11,22 @@ namespace ApplicationCore.Entities
    public class MovieCrew
     {
         [Key]
-        [ForeignKey("Movie")]
         [Column(Order = 1)]
         public int MovieId { get; set; }
+
         [Key]
-        [ForeignKey("Crew")]
         [Column(Order = 1)]
         public int CrewId { get; set; }
+
         [Required]
         public string Department { get; set; }
+
         [Required]
         public string Job { get; set; }
+
+        [ForeignKey("MovieId")]
+        public Movie movie { get; set; }
+        [ForeignKey("CrewId")]
+        public Crew crew { get; set; }
     }
 }
