@@ -21,6 +21,9 @@ namespace Infrastructure.Data
         public DbSet<MovieCrew> MovieCrew { get; set; }
         public DbSet<Cast> Cast { get; set; }
         public DbSet<MovieCast> MovieCast { get; set; }
+
+        public DbSet<User> User { get; set; }
+
         public DbSet<Role> Role { get; set; }
 
         public DbSet<Trailer> Trailer { get; set; }
