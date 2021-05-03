@@ -18,7 +18,7 @@ namespace Infrastructure.Data
         public DbSet<Genre> Genre { get; set; }
         public DbSet<MovieCast> MovieCast { get; set; }
         public DbSet<Crew> Crew { get; set; }
-        
+        public DbSet<MovieCrew> MovieCrew { get; set; }
         public DbSet<Cast> Cast { get; set; }
 
         public DbSet<Trailer> Trailer { get; set; }
@@ -33,21 +33,23 @@ namespace Infrastructure.Data
 
 
 
-
-
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<MovieCrew>()
-                 .HasKey(m => new { m.MovieId, m.CrewId});
+                 .HasKey(m => new { m.MovieId, m.CrewId, m.Department,m.Job });
+            modelBuilder.Entity<MovieCrew>()
+                .HasOne(mc => mc.Movie).WithMany(mc => mc.MovieCrews).HasForeignKey(mc => mc.MovieId);
+            modelBuilder.Entity<MovieCrew>()
+                .HasOne(mc => mc.Crew).WithMany(mc => mc.MovieCrews).HasForeignKey(mc => mc.CrewId);
+
+
             modelBuilder.Entity<MovieCast>()
                  .HasKey(m => new { m.MovieId, m.CastId,m.Character });
             modelBuilder.Entity<MovieCast>()
                 .HasOne(mc => mc.Movie).WithMany(mc => mc.MovieCasts).HasForeignKey(mc => mc.MovieId);
             modelBuilder.Entity<MovieCast>()
                 .HasOne(mc => mc.Cast).WithMany(mc => mc.MovieCasts).HasForeignKey(mc => mc.CastId);
+
             modelBuilder.Entity<UserRole>()
                 .HasKey(m => new { m.UserId, m.RoleId });
             modelBuilder.Entity<Review>()

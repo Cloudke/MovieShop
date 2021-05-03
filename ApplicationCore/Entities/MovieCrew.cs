@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entities
 {
-   public class MovieCrew
+    public class MovieCrew
     {
         [Key]
         [Column(Order = 1)]
@@ -18,11 +18,11 @@ namespace ApplicationCore.Entities
         [Column(Order = 1)]
         public int CrewId { get; set; }
 
-        [Required]
+        [Key]
         [MaxLength(128)]
         public string Department { get; set; }
 
-        [Required]
+        [Key]
         [MaxLength(128)]
         public string Job { get; set; }
 
@@ -32,3 +32,4 @@ namespace ApplicationCore.Entities
         public Crew Crew { get; set; }
     }
 }
+
