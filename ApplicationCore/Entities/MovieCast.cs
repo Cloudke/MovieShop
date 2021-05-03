@@ -10,22 +10,17 @@ namespace ApplicationCore.Entities
 {
     public class MovieCast
     {
-
         [Key]
-        [Column(Order = 1)]
         public int MovieId { get; set; }
-
         [Key]
-        [Column(Order = 1)]
         public int CastId { get; set; }
+        [Key]
         [MaxLength(450)]
-        [Required]
         public string Character { get; set; }
 
-
         [ForeignKey("MovieId")]
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         [ForeignKey("CastId")]
-        public Cast cast { get; set; }
+        public Cast Cast { get; set; }
     }
 }

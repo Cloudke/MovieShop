@@ -17,8 +17,10 @@ namespace ApplicationCore.Entities
         public string Title { get; set; }
 
         public ICollection<Genre> Genres { get; set; }
+        public ICollection<Trailer> Trailers { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
-
+        public ICollection<MovieCast> MovieCasts { get; set; }
 
         public string? Overview { get; set; }
 
