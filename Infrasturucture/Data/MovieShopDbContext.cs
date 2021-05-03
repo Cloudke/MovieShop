@@ -29,12 +29,24 @@ namespace Infrastructure.Data
 
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<User> UserRole { get; set; }
+
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Movie>().Ignore(m => m.Rating);
+            modelBuilder.Entity<Movie>().Property(m => m.CreatedDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<Movie>().HasMany(m => m.Genres).WithMany(g => g.Movies)
+                    .UsingEntity<Dictionary<string, object>>("MovieGenre",
+                        m => m.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
+                        g => g.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
+            modelBuilder.Entity<User>().HasMany(u => u.Roles).WithMany(r => r.Users)
+                .UsingEntity<Dictionary<string, object>>("UserRole",
+                    u => u.HasOne<Role>().WithMany().HasForeignKey("RoleId"),
+                    r => r.HasOne<User>().WithMany().HasForeignKey("UserId"));
+
             modelBuilder.Entity<MovieCrew>()
                  .HasKey(m => new { m.MovieId, m.CrewId, m.Department,m.Job });
             modelBuilder.Entity<MovieCrew>()
@@ -50,17 +62,11 @@ namespace Infrastructure.Data
             modelBuilder.Entity<MovieCast>()
                 .HasOne(mc => mc.Cast).WithMany(mc => mc.MovieCasts).HasForeignKey(mc => mc.CastId);
 
-            modelBuilder.Entity<UserRole>()
-                .HasKey(m => new { m.UserId, m.RoleId });
+
             modelBuilder.Entity<Review>()
                 .HasKey(m => new { m.MovieId, m.UserId });
 
-            modelBuilder.Entity<Movie>().Ignore(m => m.Rating);
-            modelBuilder.Entity<Movie>().Property(m => m.CreatedDate).HasDefaultValueSql("getdate()");
-            modelBuilder.Entity<Movie>().HasMany(m => m.Genres).WithMany(g => g.Movies)
-                    .UsingEntity<Dictionary<string, object>>("MovieGenre",
-                        m => m.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
-                        g => g.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));
+
 
         }
 

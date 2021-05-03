@@ -36,5 +36,8 @@ namespace ApplicationCore.Entities
         public bool? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
 
+        public ICollection<Role> Roles { get; set; }
+
+
     }
 }
