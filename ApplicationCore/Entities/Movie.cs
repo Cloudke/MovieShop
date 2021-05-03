@@ -15,7 +15,11 @@ namespace ApplicationCore.Entities
         [MaxLength(256)]
         [Required]
         public string Title { get; set; }
-#nullable enable
+
+        public ICollection<Genre> Genres { get; set; }
+
+
+
         public string? Overview { get; set; }
 
         [MaxLength(512)]
@@ -45,5 +49,8 @@ namespace ApplicationCore.Entities
         public DateTime? UpdatedDate { get; set; }
         public string? UpdatedBy { get; set; }
         public string? CreatedBy { get; set; }
+
+        [NotMapped]
+        public decimal? Rating { get; set; }
     }
 }

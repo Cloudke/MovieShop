@@ -22,11 +22,10 @@ namespace ApplicationCore.Entities
         public decimal Rating { get; set; }
 
         [ForeignKey("MovieId")]
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         [ForeignKey("UserId")]
-        public User user { get; set; }
+        public virtual User User { get; set; }
 
-#nullable enable
         public string? ReviewText { get; set; }
 
 

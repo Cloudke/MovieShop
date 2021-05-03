@@ -14,15 +14,13 @@ namespace ApplicationCore.Entities
 
         public int MovieId { get; set; }
 
-        [ForeignKey("MovieId")]
-        public Movie movie { get; set; }
-
-#nullable enable
         [MaxLength(2084)]
         public string? TrailerUrl { get; set; }
 
         [MaxLength(2084)]
         public string? Name { get; set; }
 
+        [ForeignKey("MovieId")]
+        public Movie Movie { get; set; }
     }
 }

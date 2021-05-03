@@ -11,7 +11,7 @@ namespace ApplicationCore.Entities
     {
         public int Id { get; set; }
 
-#nullable enable
+
         [MaxLength(128)]
         public string? FirstName { get; set; }
         [MaxLength(128)]
@@ -35,5 +35,6 @@ namespace ApplicationCore.Entities
         public DateTime? LastLoginDateTime { get; set; }
         public bool? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
+
     }
 }

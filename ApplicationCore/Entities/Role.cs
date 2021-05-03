@@ -11,8 +11,9 @@ namespace ApplicationCore.Entities
     {
         public int Id { get; set; }
 
-#nullable enable
+
         [MaxLength(20)]
         public string? Name { get; set; }
+
     }
 }

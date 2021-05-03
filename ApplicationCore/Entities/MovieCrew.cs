@@ -27,8 +27,8 @@ namespace ApplicationCore.Entities
         public string Job { get; set; }
 
         [ForeignKey("MovieId")]
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         [ForeignKey("CrewId")]
-        public Crew crew { get; set; }
+        public Crew Crew { get; set; }
     }
 }
