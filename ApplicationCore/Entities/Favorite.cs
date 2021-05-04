@@ -14,8 +14,8 @@ namespace ApplicationCore.Entities
         public int UserId { get; set; }
 
         [ForeignKey("MovieId")]
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         [ForeignKey("UserId")]
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }

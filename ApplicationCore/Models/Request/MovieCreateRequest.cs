@@ -8,8 +8,8 @@ namespace ApplicationCore.Models.Request
 {
     public class MovieCreateRequestModel
     {
-        public String title { get; set; }
-        public decimal budget { get; set; }
-        public decimal revenue { get; set; }
+        public String Title { get; set; }
+        public decimal? Budget { get; set; }
+        public decimal Revenue { get; set; }
     }
 }

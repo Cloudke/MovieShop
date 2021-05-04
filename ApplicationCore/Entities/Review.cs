@@ -21,12 +21,13 @@ namespace ApplicationCore.Entities
         [Column(TypeName = "decimal(3, 2)")]
         public decimal Rating { get; set; }
 
+        public string? ReviewText { get; set; }
+
+
         [ForeignKey("MovieId")]
         public Movie Movie { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-
-        public string? ReviewText { get; set; }
 
 
     }
