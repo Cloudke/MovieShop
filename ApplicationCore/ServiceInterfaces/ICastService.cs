@@ -1,4 +1,4 @@
-﻿using ApplicationCore.Models.Response;
+﻿using ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.ServiceInterfaces
 {
-    public interface IMovieService
+    public interface ICastService
     {
-        Task<List<MovieResponseModel>> GetTop30RevenueMovie();
-
     }
 }

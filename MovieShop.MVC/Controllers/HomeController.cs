@@ -21,7 +21,7 @@ namespace MovieShop.MVC.Controllers
         //}
 
         private readonly IMovieService _movieService;
-        private readonly MovieShopDbContext _dbContext;
+        //private readonly MovieShopDbContext _dbContext;
 
         public HomeController(IMovieService movieService)
         {

@@ -53,21 +53,14 @@ namespace Infrastructure.Repositories
 
         public async Task<T> AddAsync(T entity)
         {
-            // Movie
-            // Id PK,Identity
-            // Title ="ABC", Revenue =1223321
             _dbContext.Set<T>().Add(entity);
+            //actual write to db and commit
             await _dbContext.SaveChangesAsync();
             return entity;
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
-            // Movie
-            // Id=22 PK,Identity
-            // db data Title ="ABC", Revenue =1223321
-            // Title = "ABC2", Revenue=5345435
-
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
             return entity;

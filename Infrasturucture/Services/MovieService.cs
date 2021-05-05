@@ -12,11 +12,12 @@ namespace Infrastructure.Services
     public class MovieService:IMovieService
     {
         private readonly IMovieRepository _movieRepository;
-        public MovieService (IMovieRepository movieRepository)
+        private readonly ICastRepository _castRepository;
+        public MovieService (IMovieRepository movieRepository, ICastRepository castRepository)
         {
             _movieRepository = movieRepository;
+            _castRepository = castRepository;
         }
-
         public async Task<List<MovieResponseModel>> GetTop30RevenueMovie()
         {
             var movies = await _movieRepository.GetTop30HighestRevenueMovies();
@@ -34,6 +35,37 @@ namespace Infrastructure.Services
 
             return topMovies;
         }
+
+        public async Task<MovieResponseModel> GetByIdAsync(int id)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+            var movie2 = new MovieResponseModel { Id = movie.Id, Budget = movie.Budget, Title = movie.Title };
+            return movie2;
+        }
+
+        public async Task<MovieCastRatingResponseModel> GetMovieByIdAsync(int id)
+        {
+            var movie = await _movieRepository.GetByIdAsync(id);
+            var casts = await _castRepository.GetByIdAsync(id);
+            var totalCasts = new List<CastResponseModel>();
+            foreach (var cast in totalCasts)
+            {
+                totalCasts.Add(new CastResponseModel
+                {
+                    Id = cast.Id,
+                    Name = cast.Name,
+                    Gender = cast.Gender,
+                    TmdbUrl = cast.TmdbUrl,
+                    ProfilePath = cast.ProfilePath
+                });
+               
+            }
+
+            var result = new MovieCastRatingResponseModel { Id = movie.Id, Budget = movie.Budget, Title = movie.Title,Casts =totalCasts };
+            return result;
+        }
+
+
 
     }
 }
