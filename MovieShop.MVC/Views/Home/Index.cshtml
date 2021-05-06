@@ -11,6 +11,7 @@
                 @foreach (var movie in Model)
                 {
                 <div class="col-2 col-lg-3 col-sm-4 col-xl-2">
+                    @*pass single movie object to partialview _moviecard*@
                     <partial model="movie" name="_MovieCard" />
                 </div>
                 }
