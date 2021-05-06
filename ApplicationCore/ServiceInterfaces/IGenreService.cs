@@ -9,6 +9,6 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IGenreService
     {
-        Task<List<GenreResponseModel>> GetAllGenre();
+        Task<IEnumerable<GenreResponseModel>> GetAllGenres();
     }
 }

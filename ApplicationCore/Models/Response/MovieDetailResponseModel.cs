@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response
 {
-    public class MovieCastRatingResponseModel
+    public class MovieDetailResponseModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -27,7 +27,18 @@ namespace ApplicationCore.Models.Response
         public string UpdatedBy { get; set; }
         public string CreatedBy { get; set; }
         public decimal? Rating { get; set; }
-
         public List<CastResponseModel> Casts { get; set; }
+        public List<GenreResponseModel> Genres { get; set; }
+
+
+        public class CastResponseModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Gender { get; set; }
+            public string TmdbUrl { get; set; }
+            public string ProfilePath { get; set; }
+            public string Character { get; set; }
+        }
     }
 }

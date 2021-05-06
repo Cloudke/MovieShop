@@ -14,6 +14,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore.RepositoryInterfaces;
 using Infrastructure.Repositories;
+using ApplicationCore.Entities;
 
 namespace MovieShop.MVC
 {
@@ -36,6 +37,9 @@ namespace MovieShop.MVC
            ));
             services.AddScoped<IMovieService, MovieService>();
             services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IAsyncRepository<Cast>, EfRepository<Cast>>();
+            services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<IAsyncRepository<Genre>, EfRepository<Genre>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

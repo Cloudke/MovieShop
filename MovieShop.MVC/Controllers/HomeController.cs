@@ -28,7 +28,6 @@ namespace MovieShop.MVC.Controllers
             _movieService = movieService;
         }
 
-
         public async Task<IActionResult> Index()
         {
             var movies = await _movieService.GetTop30RevenueMovie();

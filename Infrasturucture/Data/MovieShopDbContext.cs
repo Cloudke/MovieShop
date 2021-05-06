@@ -37,7 +37,7 @@ namespace Infrastructure.Data
         {
             modelBuilder.Entity<Movie>().Ignore(m => m.Rating);
             modelBuilder.Entity<Movie>().Property(m => m.CreatedDate).HasDefaultValueSql("getdate()");
-            modelBuilder.Entity<Movie>().HasMany(m => m.Genres).WithMany(g => g.Movies)
+            modelBuilder.Entity<Movie>().HasMany(m => m.Genre).WithMany(g => g.Movies)
                     .UsingEntity<Dictionary<string, object>>("MovieGenre",
                         m => m.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
                         g => g.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));

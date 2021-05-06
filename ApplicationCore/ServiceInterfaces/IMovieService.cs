@@ -9,7 +9,8 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IMovieService
     {
-        Task<List<MovieResponseModel>> GetTop30RevenueMovie();
-
+        Task<List<MovieCardResponseModel>> GetTop30RevenueMovie();
+        Task<MovieDetailResponseModel> GetMovieByIdAsync(int id);
+        Task<List<MovieCardResponseModel>> GetMoviesByGenreAsync(int id);
     }
 }

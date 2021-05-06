@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response
 {
-   public class MovieResponseModel
+   public class MovieCardResponseModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal? Budget { get; set; }
+        public string PosterUrl { get; set; }
 
     }
 }
