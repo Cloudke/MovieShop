@@ -155,4 +155,6 @@ C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Vi
 C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Views\Shared\_LoginInfoPartial.cshtml.g.cs
 C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Views\Movies\Details.cshtml.g.cs
 C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
-C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Views\Account\View.cshtml.g.cs
+C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\owner-pc\source\repos\MovieShop\MovieShop.MVC\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs

@@ -1,6 +1,6 @@
 ﻿@model ApplicationCore.Models.Response.MovieDetailResponseModel
 
-<div class="card mb-4 bg-light">
+<div>
 
     <div class="row">
         <img src="@Model.BackdropUrl" width="1500" height="700"/>
@@ -83,15 +83,18 @@
            </div>
            <div class="col">
                <h3>Casts</h3>
-               @*@foreach (var cast in Model.Casts)
+               @foreach (var cast in Model.Casts)
                {
-                       <div>
+                   <div class="row">
+                       <div class="col">
                            <img src="@cast.ProfilePath"
-                                alt="@cast.Name" />
+                                alt="@cast.Name"
+                                width="55" height="60" />
                        </div>
-                       <div> @cast.Name </div>
-                       <div> @cast.Character</div>
-               }*@
+                       <div class ="col"> @cast.Name </div>
+                       <div class="col"> @cast.Character</div>
+                   </div>
+               }
            </div>
 
     </div>

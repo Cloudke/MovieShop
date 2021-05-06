@@ -23,7 +23,7 @@ namespace MovieShop.MVC.Controllers
             return View(movie);
         }
 
-        public async Task<IActionResult> GetMoviesByGenre(int id)
+        public async Task<IActionResult> Genre(int id)
         {
             // call my movie service to get the movies by genre
             var movies = await _movieService.GetMoviesByGenreAsync(id);

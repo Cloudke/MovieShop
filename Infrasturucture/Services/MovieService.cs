@@ -74,20 +74,19 @@ namespace Infrastructure.Services
 
                 });
             }
-            //var casts = new List<MovieDetailResponseModel.CastResponseModel>();
-            //foreach (var cast in movie.MovieCasts)
-            //{
-            //    var singleCast = await _castRepository.GetByIdAsync(cast.CastId);
-            //    casts.Add(new MovieDetailResponseModel.CastResponseModel
-            //    {
-            //        Id = singleCast.Id,
-            //        Name = singleCast.Name,
-            //        Gender = singleCast.Gender,
-            //        TmdbUrl = singleCast.TmdbUrl,
-            //        ProfilePath = singleCast.ProfilePath,
-            //        Character = cast.Character,
-            //    });
-            //}
+            var casts = new List<MovieDetailResponseModel.CastResponseModel>();
+            foreach (var cast in movie.MovieCasts)
+            {              
+                casts.Add(new MovieDetailResponseModel.CastResponseModel
+                {
+                    Id = cast.Cast.Id,
+                    Name = cast.Cast.Name,
+                    Gender = cast.Cast.Gender,
+                    TmdbUrl = cast.Cast.TmdbUrl,
+                    ProfilePath = cast.Cast.ProfilePath,
+                    Character = cast.Character,
+                });
+            }
             var result = new MovieDetailResponseModel
             {
                 Id = movie.Id,
@@ -102,7 +101,7 @@ namespace Infrastructure.Services
                 Price = movie.Price,
                 Rating = movie.Rating,
                 Genres = genres,
-                //Casts = casts
+                Casts = casts
             };
             return result;
         }
@@ -114,7 +113,7 @@ namespace Infrastructure.Services
             var movies = await _movieRepository.GetMoviesByGenreAsync(id);
 
             var total = new List<MovieCardResponseModel>();
-            foreach (var movie in total)
+            foreach (var movie in movies)
             {
                 total.Add(new MovieCardResponseModel
                 {

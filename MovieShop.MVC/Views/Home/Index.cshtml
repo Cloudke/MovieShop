@@ -7,13 +7,13 @@
 
 <div class=" rounded">
     <div class="container-fluid bg-light">
-        <div class="row">
-            @foreach (var movie in Model)
-            {
-            <div class="col-2 col-lg-3 col-sm-4 col-xl-2">
-                <partial model="movie" name="_MovieCard" />
+            <div class="row">
+                @foreach (var movie in Model)
+                {
+                <div class="col-2 col-lg-3 col-sm-4 col-xl-2">
+                    <partial model="movie" name="_MovieCard" />
+                </div>
+                }
             </div>
-            }
-        </div>
       </div>
 </div>
