@@ -101,5 +101,16 @@ namespace Infrastructure.Services
                 numBytesRequested: 256 / 8));
             return hashed;
         }
+
+        public async Task<UserRegisterResponseModel> GetUserProfile(int id)
+        {
+            var dbuser = await _userRepository.GetByIdAsync(id);
+            if(dbuser == null)
+            {
+                return null;
+            }
+            var user = new UserRegisterResponseModel {Id = dbuser.Id,Email=dbuser.Email, FirstName=dbuser.FirstName,LastName=dbuser.LastName };
+            return user;
+        }
     }
 }

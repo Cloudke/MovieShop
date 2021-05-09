@@ -12,6 +12,7 @@ namespace ApplicationCore.ServiceInterfaces
     {
         Task<UserRegisterResponseModel> RegisterUser(UserRegisterRequestModel registerRequest);
         Task<LoginResponseModel> ValidateUser(string email, string password);
+        Task<UserRegisterResponseModel> GetUserProfile(int id);
 
     }
 }

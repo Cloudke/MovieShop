@@ -1,0 +1,17 @@
+﻿@using ApplicationCore.ServiceInterfaces;
+@inject ICurrentUserService _currentUserService
+
+<h3>
+    User Profile
+</h3>
+<div class="container-fluid">
+
+    <div class="row">
+        Your Email:
+        @_currentUserService.Email
+    </div>
+    <div class="row">
+        Your FullName:
+        @_currentUserService.FullName
+    </div>
+</div>

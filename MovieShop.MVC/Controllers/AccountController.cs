@@ -14,9 +14,11 @@ namespace MovieShop.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly IUserService _userService;
-        public AccountController(IUserService userService)
+        private readonly ICurrentUserService _currentUserService;
+        public AccountController(IUserService userService, ICurrentUserService currentUserService)
         {
             _userService = userService;
+            _currentUserService = currentUserService;
         }
 
         [HttpGet]
@@ -27,7 +29,7 @@ namespace MovieShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequestModel userRegisterRequestModel)
         {
-            var NewUser = _userService.RegisterUser(userRegisterRequestModel);
+            var newUser = await _userService.RegisterUser(userRegisterRequestModel);
             return View();
         }
         [HttpGet]
@@ -47,7 +49,7 @@ namespace MovieShop.MVC.Controllers
             //if user entered correct un/pw
             //Cookie based Auth
             //Claims firstlastname.dob.can be encrypted
-
+            //key value
             var claims = new List<Claim>() { 
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.Surname,user.LastName),
@@ -55,16 +57,39 @@ namespace MovieShop.MVC.Controllers
                 new Claim(ClaimTypes.GivenName,user.FirstName)
             };
 
+            //authentication type :cookie
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // create cookie
-
+            //sign in and create cookie
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity));
-            return View(); 
+
+            //return View();
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProfile()
+        {
+            //Call the db and get the user info and fill that in textboxes so that user can edit
+            var User = await _userService.GetUserProfile((int)_currentUserService.UserId);
+            return View(User);
+        }
+        [HttpPut]
+        public async Task<IActionResult> EditProfile(UserRequestModel userRequestModel)
+        {
+            // call the user service and map the UserRequestModel data in to User entity and call the repository
             return View();
         }
     }
