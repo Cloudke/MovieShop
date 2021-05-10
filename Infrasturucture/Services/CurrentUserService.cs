@@ -31,5 +31,9 @@ namespace Infrastructure.Services
             .FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value + " " + _httpContextAccessor.HttpContext?.User
             .Claims
             .FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value;
+        public string FirstName => _httpContextAccessor.HttpContext?.User.Claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
+        public string LastName => _httpContextAccessor.HttpContext?.User.Claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value;
     }
 }

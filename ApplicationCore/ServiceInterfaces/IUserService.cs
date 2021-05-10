@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Models.Request;
+﻿using ApplicationCore.Entities;
+using ApplicationCore.Models.Request;
 using ApplicationCore.Models.Response;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         Task<UserRegisterResponseModel> RegisterUser(UserRegisterRequestModel registerRequest);
         Task<LoginResponseModel> ValidateUser(string email, string password);
-        Task<UserRegisterResponseModel> GetUserProfile(int id);
+        Task<UserRegisterResponseModel> GetUserProfile(string email);
+        Task<UserRequestModel> UpdateUser(UserRequestModel updateRequest);
 
     }
 }

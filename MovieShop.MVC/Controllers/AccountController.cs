@@ -26,12 +26,14 @@ namespace MovieShop.MVC.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequestModel userRegisterRequestModel)
         {
             var newUser = await _userService.RegisterUser(userRegisterRequestModel);
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -76,21 +78,24 @@ namespace MovieShop.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
-            return View();
+            var User = await _userService.GetUserProfile(_currentUserService.Email);
+            return View(new UserRequestModel { Id = User.Id, Email = User.Email, FirstName = User.FirstName, LastName = User.LastName });
         }
 
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
             //Call the db and get the user info and fill that in textboxes so that user can edit
-            var User = await _userService.GetUserProfile((int)_currentUserService.UserId);
-            return View(User);
+            var User = await _userService.GetUserProfile(_currentUserService.Email);
+            return View(new UserRequestModel {Id=User.Id, Email = User.Email,FirstName=User.FirstName,LastName = User.LastName});
         }
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> EditProfile(UserRequestModel userRequestModel)
         {
             // call the user service and map the UserRequestModel data in to User entity and call the repository
-            return View();
+            var User = await _userService.UpdateUser(userRequestModel);
+            //return View(User);
+            return RedirectToAction("Profile");
         }
     }
 }

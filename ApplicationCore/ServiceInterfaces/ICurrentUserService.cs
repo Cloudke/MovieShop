@@ -12,5 +12,7 @@ namespace ApplicationCore.ServiceInterfaces
         bool IsAuthenticated { get; }
         string Email { get; }
         string FullName { get; }
+        string FirstName { get; }
+        string LastName { get; }
     }
 }

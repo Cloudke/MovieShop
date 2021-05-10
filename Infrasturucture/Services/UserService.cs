@@ -102,15 +102,24 @@ namespace Infrastructure.Services
             return hashed;
         }
 
-        public async Task<UserRegisterResponseModel> GetUserProfile(int id)
+        public async Task<UserRegisterResponseModel> GetUserProfile(string email)
         {
-            var dbuser = await _userRepository.GetByIdAsync(id);
-            if(dbuser == null)
+            var dbuser = await _userRepository.GetUserByEmail(email);
+            if (dbuser == null)
             {
                 return null;
             }
             var user = new UserRegisterResponseModel {Id = dbuser.Id,Email=dbuser.Email, FirstName=dbuser.FirstName,LastName=dbuser.LastName };
             return user;
+        }
+
+        public async Task<UserRequestModel> UpdateUser(UserRequestModel updateRequest)
+        {
+            var dbUser = await _userRepository.GetUserByEmail(updateRequest.Email);
+            var getUser = new User { Id = dbUser.Id,Salt = dbUser.Salt,HashedPassword= CreateHashedPassword(updateRequest.Password, dbUser.Salt), Email = updateRequest.Email, FirstName = updateRequest.FirstName, LastName = updateRequest.LastName };
+            var user = await _userRepository.UpdateAsync(getUser);
+            var updatedUser = new UserRequestModel { Id = user.Id, Email = user.Email, FirstName = user.FirstName, LastName = user.LastName };
+            return updatedUser;
         }
     }
 }

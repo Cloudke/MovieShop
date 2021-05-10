@@ -1,5 +1,4 @@
-﻿@using ApplicationCore.ServiceInterfaces;
-@inject ICurrentUserService _currentUserService
+﻿@model  ApplicationCore.Models.Request.UserRequestModel;
 
 <h3>
     User Profile
@@ -8,10 +7,14 @@
 
     <div class="row">
         Your Email:
-        @_currentUserService.Email
+        @Model.Email
     </div>
     <div class="row">
-        Your FullName:
-        @_currentUserService.FullName
+        Your FirstName:
+        @Model.FirstName
+    </div>
+    <div class="row">
+        Your LastName:
+        @Model.LastName
     </div>
 </div>
