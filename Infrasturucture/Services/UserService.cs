@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using ApplicationCore.Entities;
+using ApplicationCore.Exceptions;
 
 namespace Infrastructure.Services
 {
@@ -27,7 +28,7 @@ namespace Infrastructure.Services
             var dbuser = await _userRepository.GetUserByEmail(registerRequest.Email);
             if(dbuser != null)
             {
-                throw new Exception("User Already exist");
+                throw new ConflictException("User Already exists,please try to login");
             }
 
             //generate a unique salt
@@ -120,6 +121,48 @@ namespace Infrastructure.Services
             var user = await _userRepository.UpdateAsync(getUser);
             var updatedUser = new UserRequestModel { Id = user.Id, Email = user.Email, FirstName = user.FirstName, LastName = user.LastName };
             return updatedUser;
+        }
+
+        public async Task<UserDetailsResponseModel> GetUserById(int id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                throw new NotFoundException("user does not exist");
+            }
+
+            var userDetails = new UserDetailsResponseModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+
+            return userDetails;
+        }
+
+        public async Task<List<UserDetailsResponseModel>> GetAllUsers()
+        {
+            var users = await _userRepository.GetTop30Users();
+            if (users == null)
+            {
+                throw new NotFoundException("user does not exist");
+            }
+
+            var allUsers = new List<UserDetailsResponseModel>();
+            foreach (var user in users)
+            {
+                allUsers.Add(new UserDetailsResponseModel
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                });
+            }
+            return allUsers;
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Models.Response;
 using ApplicationCore.RepositoryInterfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,12 @@ namespace Infrastructure.Repositories
     {
         public UserRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<IEnumerable<User>> GetTop30Users()
+        {
+            var users = await _dbContext.User.OrderByDescending(m => m.Id).Take(30).ToListAsync();
+            return users;
         }
 
         public async Task<User> GetUserByEmail(string email)

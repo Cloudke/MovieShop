@@ -33,16 +33,21 @@ namespace Infrastructure.Repositories
             //show watch button only when user logged in and purchased the movies otherwise show buy button
             //include, theninclude
 
-            var rating = await _dbContext.Review.Where(r => r.MovieId == id).AverageAsync(r => r.Rating);
+           var rating = await _dbContext.Review.Where(r => r.MovieId == id).DefaultIfEmpty()
+                .AverageAsync(r => r == null ? 0 : r.Rating);
             //assign movie avg rating;
-            movie.Rating = rating;
+            if (rating > 0)
+            {
+                movie.Rating = rating;
+            }
+
             return movie;
         }
 
 
 
         //api/Movies/toprated
-        public async Task<IEnumerable<Movie>> GetTopRatedMoviesAsync()
+        public async Task<IEnumerable<Movie>> GetTopRatedMovies()
         {
             var movies = await _dbContext.Movie.OrderByDescending(m => m.Rating).Take(30).ToListAsync();
             return movies;
@@ -60,6 +65,18 @@ namespace Infrastructure.Repositories
         {
             var movie = await _dbContext.Genre.Include(m => m.Movies).Where(g => g.Id == id).SelectMany(m => m.Movies).ToListAsync();
             return movie;
+        }
+
+        public async Task<IEnumerable<Movie>> GetAllMovies()
+        {
+            var movies = await _dbContext.Movie.OrderByDescending(m => m.Id).ToListAsync();
+            return movies;
+        }
+
+        public async Task<List<Review>> GetMovieReviewsAsync(int id)
+        {
+            var movieReviews = await _dbContext.Review.Where(r => r.MovieId == id).ToListAsync();
+            return movieReviews;
         }
 
         //First()

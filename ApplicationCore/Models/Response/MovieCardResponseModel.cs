@@ -12,6 +12,8 @@ namespace ApplicationCore.Models.Response
         public string Title { get; set; }
         public decimal? Budget { get; set; }
         public string PosterUrl { get; set; }
+        public decimal? Rating { get; set; }
+        public decimal? Revenue { get; set; }
 
     }
 }

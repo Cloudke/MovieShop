@@ -41,13 +41,15 @@ namespace Infrastructure.Services
                     Id = singleMovie.Id,
                     Title = singleMovie.Title,
                     Budget = singleMovie.Budget,
-                    PosterUrl = singleMovie.PosterUrl
+                    PosterUrl = singleMovie.PosterUrl,
+                    Rating =singleMovie.Rating,
+                    Revenue = singleMovie.Revenue
                 });
             }
 
-
             var result = new CastDetailResponseModel{ Id = cast.Id, Name = cast.Name, Gender = cast.Gender, TmdbUrl = cast.TmdbUrl, 
                                                        ProfilePath = cast.ProfilePath,Movies = movies } ;
+
             return result;
         }
     }

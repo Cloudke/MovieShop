@@ -19,4 +19,9 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
+    <ProjectReference Include="..\Infrasturucture\Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

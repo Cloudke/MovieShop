@@ -15,6 +15,7 @@ namespace ApplicationCore.ServiceInterfaces
         Task<LoginResponseModel> ValidateUser(string email, string password);
         Task<UserRegisterResponseModel> GetUserProfile(string email);
         Task<UserRequestModel> UpdateUser(UserRequestModel updateRequest);
-
+        Task<UserDetailsResponseModel> GetUserById(int id);
+        Task<List<UserDetailsResponseModel>> GetAllUsers();
     }
 }

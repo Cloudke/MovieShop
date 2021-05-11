@@ -51,7 +51,8 @@ namespace Infrastructure.Services
                     Id = movie.Id,
                     Budget = movie.Budget,
                     Title = movie.Title,
-                    PosterUrl = movie.PosterUrl
+                    PosterUrl = movie.PosterUrl,
+                    Revenue = movie.Revenue
                 });
             }
 
@@ -126,5 +127,56 @@ namespace Infrastructure.Services
             return total;
         }
 
+        public async Task<List<MovieCardResponseModel>> GetAllMovies()
+        {
+            var dbmovies = await _movieRepository.GetAllMovies();
+            var allMovies = new List<MovieCardResponseModel>();
+            foreach (var movie in dbmovies)
+            {
+                allMovies.Add(new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    Budget = movie.Budget,
+                    Title = movie.Title,
+                    PosterUrl = movie.PosterUrl
+                });
+            }
+
+            return allMovies;
+        }
+        public async Task<List<MovieCardResponseModel>> GetTopRatedMovies()
+        {
+            var dbmovies = await _movieRepository.GetTopRatedMovies();
+            var allMovies = new List<MovieCardResponseModel>();
+            foreach (var movie in dbmovies)
+            {
+                allMovies.Add(new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    Budget = movie.Budget,
+                    Title = movie.Title,
+                    PosterUrl = movie.PosterUrl,
+                });
+            }
+
+            return allMovies;
+        }
+
+        public async Task<List<ReviewResponseModel>> GetMovieReviews(int id)
+        {
+            var reviews = await _movieRepository.GetMovieReviewsAsync(id);
+            var allReviews = new List<ReviewResponseModel>();
+            foreach (var review in reviews)
+            {
+                allReviews.Add(new ReviewResponseModel
+                {
+                    UserId = review.UserId,
+                    MovieId = review.MovieId,                  
+                    Rating = review.Rating,
+                    ReviewText = review.ReviewText
+                });
+            }
+            return allReviews;
+        }
     }
 }

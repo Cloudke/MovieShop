@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using ApplicationCore.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace ApplicationCore.RepositoryInterfaces
     public interface IUserRepository:IAsyncRepository<User>
     {
         Task<User> GetUserByEmail(string email);
+        Task<IEnumerable<User>> GetTop30Users();
     }
 }
