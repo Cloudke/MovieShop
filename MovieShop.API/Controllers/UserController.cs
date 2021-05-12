@@ -21,6 +21,49 @@ namespace MovieShop.API.Controllers
             _movieService = movieService;
         }
 
+        [HttpPost]
+        [Route("purchase")]
+        public async Task<IActionResult> PurchaseMovie()
+        {
+            return Ok("");
+        }
+
+        [HttpPost]
+        [Route("favorite")]
+        public async Task<IActionResult> FavoriteMovie(int id)
+        {
+            return Ok("");
+        }
+
+        [HttpPost]
+        [Route("unfavorite")]
+        public async Task<IActionResult> UnfavoriteMovie(int id)
+        {
+            return Ok("");
+        }
+
+        [HttpGet]
+        [Route("{id:int}/movie/{movieId:int}/favorite")]
+        public async Task<IActionResult> CheckIsFavoritedMovie(int id,int movieId)
+        {
+            return Ok("");
+        }
+
+        [HttpPost]
+        [Route("review")]
+        public async Task<IActionResult> PostReview()
+        {
+            return Ok("");
+        }
+
+        [HttpPut]
+        [Route("review")]
+        public async Task<IActionResult> UpdateReview()
+        {
+            return Ok("");
+        }
+
+
         [HttpGet]
         [Route("{id:int}/purchases")]
         public async Task<IActionResult> GetAllPurchasesForUser(int id)
