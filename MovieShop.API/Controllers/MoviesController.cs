@@ -31,7 +31,7 @@ namespace MovieShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}",Name ="GetMovieById")]
         public async Task<IActionResult> GetMovieById(int id)
         {
             var movie = await _movieService.GetMovieByIdAsync(id);
@@ -44,7 +44,7 @@ namespace MovieShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("topRated")]
+        [Route("toprated")]
         public async Task<IActionResult> GetTopRated()
         {
 
@@ -58,7 +58,7 @@ namespace MovieShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("topRevenue")]
+        [Route("toprevenue")]
         public async Task<IActionResult> GetTopRevenue()
         {
 

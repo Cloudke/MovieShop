@@ -26,12 +26,13 @@ namespace MovieShop.API.Controllers
         public async Task<IActionResult> AddMovie(MovieCreateRequestModel request)
         {
             var movie = await _movieService.CreateMovie(request);
-            return CreatedAtRoute("purchases",movie);
+            //routename, routeid,object
+            return CreatedAtRoute("GetMovieById",new { id=movie.Id},movie);
         }
 
         [HttpPut]
         [Route("movie")]
-        public async Task<IActionResult> UpdateMovie()
+        public async Task<IActionResult> UpdateMovie(MovieCreateRequestModel request)
         {
             var movie = await _movieService.GetAllPurchases();
             return Ok(movie);

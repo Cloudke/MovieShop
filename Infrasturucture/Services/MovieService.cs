@@ -204,7 +204,7 @@ namespace Infrastructure.Services
             var createdMovie = await _movieRepository.AddAsync(new Movie {Title=request.Title,Budget=request.Budget,Revenue=request.Revenue });
 
 
-            return new MovieDetailResponseModel {Id = createdMovie.Id,Title = createdMovie.Title,Budget=createdMovie.Budget };
+            return new MovieDetailResponseModel {Id = createdMovie.Id,Title = createdMovie.Title,Budget=createdMovie.Budget,Revenue=request.Revenue };
         }
 
 
