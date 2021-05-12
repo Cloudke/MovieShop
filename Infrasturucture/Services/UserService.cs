@@ -256,8 +256,29 @@ namespace Infrastructure.Services
         {
             //find favorite movie by two id
             var favorite = await _favoriteRepository.ListAsync(f => f.UserId == id && f.MovieId == movieId );
-            var result = await _favoriteRepository.DeleteAsync(favorite.FirstOrDefault());
+            var result = await _favoriteRepository.DeleteAsync(favorite.First());
             return result>0;
+        }
+
+
+        public async Task<Review> AddReview(ReviewRequestModel review)
+        {
+            var newReview = new Review { MovieId = review.MovieId, UserId = review.UserId, ReviewText = review.ReviewText, Rating = review.Rating };
+            return await _reviewRepository.AddAsync(newReview);
+
+        }
+
+        public async Task<Review> UpdateReview(ReviewRequestModel review)
+        {
+            var updateReview = new Review { MovieId = review.MovieId, UserId = review.UserId, ReviewText = review.ReviewText, Rating = review.Rating };
+            return await _reviewRepository.UpdateAsync(updateReview);
+        }
+
+        public async Task<bool> DeleteReview(int userId, int movieId)
+        {
+            var review = await _reviewRepository.ListAsync(r => r.MovieId == movieId && r.UserId == userId);
+            var result = await _reviewRepository.DeleteAsync(review.First());
+            return result > 0;
         }
     }
 }

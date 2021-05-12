@@ -65,18 +65,33 @@ namespace MovieShop.API.Controllers
 
         [HttpPost]
         [Route("review")]
-        public async Task<IActionResult> PostReview()
+        public async Task<IActionResult> AddReview(ReviewRequestModel newReview)
         {
-            return Ok("");
+            newReview.UserId = (int)_currentUserService.UserId;
+            var review = await _userService.AddReview(newReview);
+            return Ok(review);
         }
 
         [HttpPut]
         [Route("review")]
-        public async Task<IActionResult> UpdateReview()
+        public async Task<IActionResult> UpdateReview(ReviewRequestModel updateReview)
         {
-            return Ok("");
+            updateReview.UserId = (int)_currentUserService.UserId;
+            var review = await _userService.UpdateReview(updateReview);
+            return Ok(review);
         }
 
+        [HttpDelete]
+        [Route("{userId:int}/movie/{movieId:int}")]
+        public async Task<IActionResult> DeleteReview(int movieId,int userId)
+        {
+            var result = await _userService.DeleteReview(userId, movieId);
+            if (result)
+            {
+                return Ok();
+            }
+            return NotFound("Failed to delete review");
+        }
 
         [HttpGet]
         [Route("{id:int}/purchases")]
