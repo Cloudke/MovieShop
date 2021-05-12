@@ -46,7 +46,8 @@ namespace MovieShop.API.Controllers
         [Route("{id:int}/movie/{movieId:int}/favorite")]
         public async Task<IActionResult> CheckIsFavoritedMovie(int id,int movieId)
         {
-            return Ok("");
+            var isFavoritedMovie = await _userService.IsFavoritedMovieByUser(id, movieId);
+            return Ok(isFavoritedMovie);
         }
 
         [HttpPost]

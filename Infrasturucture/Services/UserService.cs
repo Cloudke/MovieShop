@@ -20,11 +20,13 @@ namespace Infrastructure.Services
         private readonly IUserRepository _userRepository;
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IReviewRepository _reviewRepository;
-        public UserService(IUserRepository userRepository, IPurchaseRepository purchaseRepository, IReviewRepository reviewRepository)
+        private readonly IFavoriteRepository _favoriteRepository;
+        public UserService(IUserRepository userRepository, IPurchaseRepository purchaseRepository, IReviewRepository reviewRepository, IFavoriteRepository favoriteRepository)
         {
             _userRepository = userRepository;
             _purchaseRepository = purchaseRepository;
             _reviewRepository = reviewRepository;
+            _favoriteRepository = favoriteRepository;
         }
         public async Task<UserRegisterResponseModel> RegisterUser(UserRegisterRequestModel registerRequest)
         {
@@ -231,6 +233,12 @@ namespace Infrastructure.Services
                 });
             }
             return allReviews;
+        }
+
+        public async Task<bool> IsFavoritedMovieByUser(int id, int movieId)
+        {
+            var isFavoritedMovie = await _favoriteRepository.GetExistsAsync(f => f.UserId == id && f.MovieId == movieId );
+            return isFavoritedMovie;
         }
     }
 }
