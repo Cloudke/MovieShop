@@ -39,16 +39,20 @@ namespace MovieShop.API.Controllers
             var favorite = await _userService.FavoriteMovie(model.MovieId, model.UserId);
             if (favorite == null)
             {
-               return NotFound("Failed to add favorite");
+               return NotFound("Failed to favorite the movie");
             }
             return Ok();
         }
 
         [HttpPost]
         [Route("unfavorite")]
-        public async Task<IActionResult> UnfavoriteMovie(int id)
+        public async Task<IActionResult> UnfavoriteMovie(int movieId)
         {
-            return Ok("");
+            var result = await _userService.UnFavoriteMovie(movieId, (int)_currentUserService.UserId);
+            if (result) { 
+                return Ok(); 
+            }
+            return NotFound("Failed to unfavorite the movie");
         }
 
         [HttpGet]

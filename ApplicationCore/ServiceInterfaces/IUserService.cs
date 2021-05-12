@@ -22,5 +22,6 @@ namespace ApplicationCore.ServiceInterfaces
         Task<IEnumerable<ReviewResponseModel>> GetAllReviewsById(int id);
         Task<bool> IsFavoritedMovieByUser(int id, int movieId);
         Task<Favorite> FavoriteMovie(int id, int movieId);
+        Task<bool> UnFavoriteMovie(int id, int movieId);
     }
 }

@@ -66,10 +66,14 @@ namespace Infrastructure.Repositories
             return entity;
         }
 
-        public async Task DeleteAsync(T entity)
+        public async Task<int> DeleteAsync(T entity)
         {
+            if (entity == null) { 
+                return 0; 
+            }
             _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            var result =  await _dbContext.SaveChangesAsync();
+            return result;
         }
     }
 }

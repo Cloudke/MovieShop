@@ -252,5 +252,12 @@ namespace Infrastructure.Services
             return await _favoriteRepository.AddAsync(favorite);
         }
 
+        public async Task<bool> UnFavoriteMovie(int id, int movieId)
+        {
+            //find favorite movie by two id
+            var favorite = await _favoriteRepository.ListAsync(f => f.UserId == id && f.MovieId == movieId );
+            var result = await _favoriteRepository.DeleteAsync(favorite.FirstOrDefault());
+            return result>0;
+        }
     }
 }

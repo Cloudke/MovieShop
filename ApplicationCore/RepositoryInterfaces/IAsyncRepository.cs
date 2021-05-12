@@ -16,6 +16,6 @@ namespace ApplicationCore.RepositoryInterfaces
         Task<bool> GetExistsAsync(Expression<Func<T, bool>> filter = null);
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task<int> DeleteAsync(T entity);
     }
 }
