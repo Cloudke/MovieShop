@@ -240,5 +240,17 @@ namespace Infrastructure.Services
             var isFavoritedMovie = await _favoriteRepository.GetExistsAsync(f => f.UserId == id && f.MovieId == movieId );
             return isFavoritedMovie;
         }
+
+        public async Task<Favorite> FavoriteMovie(int id,int movieId)
+        {
+            var isFavorited = await IsFavoritedMovieByUser(id, movieId);
+            if (isFavorited)
+            {
+                return null;
+            }
+            var favorite = new Favorite {UserId = id,MovieId = movieId};
+            return await _favoriteRepository.AddAsync(favorite);
+        }
+
     }
 }

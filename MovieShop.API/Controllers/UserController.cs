@@ -1,4 +1,5 @@
-﻿using ApplicationCore.ServiceInterfaces;
+﻿using ApplicationCore.Models.Request;
+using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,10 +16,12 @@ namespace MovieShop.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMovieService _movieService;
-        public UserController(IUserService userService, IMovieService movieService)
+        private readonly ICurrentUserService _currentUserService;
+        public UserController(IUserService userService, IMovieService movieService, ICurrentUserService currentUserService)
         {
             _userService = userService;
             _movieService = movieService;
+            _currentUserService = currentUserService;
         }
 
         [HttpPost]
@@ -30,9 +33,15 @@ namespace MovieShop.API.Controllers
 
         [HttpPost]
         [Route("favorite")]
-        public async Task<IActionResult> FavoriteMovie(int id)
+        public async Task<IActionResult> FavoriteMovie([FromBody] UserFavoriteRequestModel model)
         {
-            return Ok("");
+            model.UserId = (int)_currentUserService.UserId;
+            var favorite = await _userService.FavoriteMovie(model.MovieId, model.UserId);
+            if (favorite == null)
+            {
+               return NotFound("Failed to add favorite");
+            }
+            return Ok();
         }
 
         [HttpPost]
