@@ -12,5 +12,6 @@ namespace ApplicationCore.RepositoryInterfaces
     {
         Task<User> GetUserByEmail(string email);
         Task<IEnumerable<User>> GetTop30Users();
+        Task<IEnumerable<Favorite>> GetAllFavoriteMovies(int id);
     }
 }

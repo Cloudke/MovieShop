@@ -367,6 +367,10 @@ namespace Infrastructure.Migrations
                     b.Property<bool?>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserName")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
                     b.HasKey("Id");
 
                     b.ToTable("User");
@@ -404,21 +408,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("ApplicationCore.Entities.Favorite", b =>
                 {
-                    b.HasOne("ApplicationCore.Entities.Movie", "movie")
+                    b.HasOne("ApplicationCore.Entities.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApplicationCore.Entities.User", "user")
-                        .WithMany()
+                    b.HasOne("ApplicationCore.Entities.User", "User")
+                        .WithMany("Favorites")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("movie");
+                    b.Navigation("Movie");
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.MovieCast", b =>
@@ -468,7 +472,7 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -487,7 +491,7 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -557,6 +561,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("Reviews");
 
                     b.Navigation("Trailers");
+                });
+
+            modelBuilder.Entity("ApplicationCore.Entities.User", b =>
+                {
+                    b.Navigation("Favorites");
+
+                    b.Navigation("Purchases");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

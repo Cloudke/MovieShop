@@ -5,19 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationCore.ServiceInterfaces;
 using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using ApplicationCore.RepositoryInterfaces;
+using ApplicationCore.Entities;
 
 namespace Infrastructure.Services
 {
     public class MovieService:IMovieService
     {
         private readonly IMovieRepository _movieRepository;
-        private readonly ICastRepository _castRepository;
+        private readonly IPurchaseRepository _purchaseRepository;
 
-        public MovieService (IMovieRepository movieRepository)
+        public MovieService (IMovieRepository movieRepository, IPurchaseRepository purchaseRepository)
         {
             _movieRepository = movieRepository;
-  
+            _purchaseRepository = purchaseRepository;
         }
 
         //api/Movies
@@ -171,12 +173,40 @@ namespace Infrastructure.Services
                 allReviews.Add(new ReviewResponseModel
                 {
                     UserId = review.UserId,
-                    MovieId = review.MovieId,                  
+                    MovieId = review.MovieId,   
+                    Title = review.Movie.Title,
                     Rating = review.Rating,
                     ReviewText = review.ReviewText
                 });
             }
             return allReviews;
         }
+
+        public async Task<List<MovieCardResponseModel>> GetAllPurchases()
+        {
+            var movies = await _purchaseRepository.GetAllPurchases();
+            var allMovies = new List<MovieCardResponseModel>();
+            foreach (var movie in movies)
+            {
+                allMovies.Add(new MovieCardResponseModel
+                {
+                    Id = movie.Movie.Id,
+                     Budget = movie.Movie.Budget,
+                    Title = movie.Movie.Title,
+                    PosterUrl = movie.Movie.PosterUrl,
+                });
+            }
+
+            return allMovies;
+        }
+        public async Task<MovieDetailResponseModel> CreateMovie(MovieCreateRequestModel request)
+        {
+            var createdMovie = await _movieRepository.AddAsync(new Movie {Title=request.Title,Budget=request.Budget,Revenue=request.Revenue });
+
+
+            return new MovieDetailResponseModel {Id = createdMovie.Id,Title = createdMovie.Title,Budget=createdMovie.Budget };
+        }
+
+
     }
 }

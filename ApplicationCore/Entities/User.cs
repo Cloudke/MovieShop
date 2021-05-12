@@ -16,6 +16,8 @@ namespace ApplicationCore.Entities
         public string? FirstName { get; set; }
         [MaxLength(128)]
         public string? LastName { get; set; }
+        [MaxLength(128)]
+        public string? UserName { get; set; }
         public DateTime? DateOfBirth { get; set; }
 
         [MaxLength(256)]

@@ -18,9 +18,13 @@ namespace Infrastructure.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IPurchaseRepository _purchaseRepository;
+        private readonly IReviewRepository _reviewRepository;
+        public UserService(IUserRepository userRepository, IPurchaseRepository purchaseRepository, IReviewRepository reviewRepository)
         {
             _userRepository = userRepository;
+            _purchaseRepository = purchaseRepository;
+            _reviewRepository = reviewRepository;
         }
         public async Task<UserRegisterResponseModel> RegisterUser(UserRegisterRequestModel registerRequest)
         {
@@ -142,7 +146,7 @@ namespace Infrastructure.Services
             return userDetails;
         }
 
-        public async Task<List<UserDetailsResponseModel>> GetAllUsers()
+        public async Task<IEnumerable<UserDetailsResponseModel>> GetAllUsers()
         {
             var users = await _userRepository.GetTop30Users();
             if (users == null)
@@ -163,6 +167,70 @@ namespace Infrastructure.Services
             }
             return allUsers;
 
+        }
+        public async Task<IEnumerable<MovieCardResponseModel>> GetAllPurchasesById(int id)
+        {
+            var movies = await _purchaseRepository.GetAllPurchasesById(id);
+            if (movies == null)
+            {
+                throw new NotFoundException("No purchased movies");
+            }
+            var allMovies = new List<MovieCardResponseModel>();
+            foreach (var movie in movies)
+            {
+                allMovies.Add(new MovieCardResponseModel
+                {
+                    Id = movie.Movie.Id,
+                    Budget = movie.Movie.Budget,
+                    Title = movie.Movie.Title,
+                    PosterUrl = movie.Movie.PosterUrl,
+                });
+            }
+            return allMovies;
+        }
+
+        public async Task<IEnumerable<MovieCardResponseModel>> GetAllFavorite(int id)
+        {
+            var favorites = await _userRepository.GetAllFavoriteMovies(id);
+            if (favorites == null)
+            {
+                throw new NotFoundException("No Favorite movies exist");
+            }
+
+            var allMovies = new List<MovieCardResponseModel>();
+            foreach (var movie in favorites)
+            {
+                allMovies.Add(new MovieCardResponseModel
+                {
+                    Id = movie.MovieId,
+                    Budget = movie.Movie.Budget,
+                    Title = movie.Movie.Title,
+                    PosterUrl = movie.Movie.PosterUrl,
+                    Rating = movie.Movie.Rating
+                });
+            }
+            return allMovies;
+        }
+
+        public async Task<IEnumerable<ReviewResponseModel>> GetAllReviewsById(int id)
+        {
+            var reviews = await _reviewRepository.GetAllReviewsByUser(id);
+            var allReviews = new List<ReviewResponseModel>();
+            foreach (var review in reviews)
+            {
+                allReviews.Add(new ReviewResponseModel
+                {
+                    UserId = review.UserId,
+                    MovieId = review.MovieId,
+                    FirstName = review.User.FirstName,
+                    LastName = review.User.LastName,
+                    Title = review.Movie.Title, 
+                    PosterUrl = review.Movie.PosterUrl,
+                    Rating = review.Rating,
+                    ReviewText = review.ReviewText
+                });
+            }
+            return allReviews;
         }
     }
 }

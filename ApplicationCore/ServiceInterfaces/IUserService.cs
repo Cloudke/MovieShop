@@ -16,6 +16,9 @@ namespace ApplicationCore.ServiceInterfaces
         Task<UserRegisterResponseModel> GetUserProfile(string email);
         Task<UserRequestModel> UpdateUser(UserRequestModel updateRequest);
         Task<UserDetailsResponseModel> GetUserById(int id);
-        Task<List<UserDetailsResponseModel>> GetAllUsers();
+        Task<IEnumerable<UserDetailsResponseModel>> GetAllUsers();
+        Task<IEnumerable<MovieCardResponseModel>> GetAllPurchasesById(int id);
+        Task<IEnumerable<MovieCardResponseModel>> GetAllFavorite(int id);
+        Task<IEnumerable<ReviewResponseModel>> GetAllReviewsById(int id);
     }
 }

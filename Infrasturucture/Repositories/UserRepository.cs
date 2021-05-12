@@ -28,5 +28,11 @@ namespace Infrastructure.Repositories
             var user = await _dbContext.User.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
             return user;
         }
+
+        public async Task<IEnumerable<Favorite>> GetAllFavoriteMovies(int id)
+        {
+            var user = await _dbContext.Favorite.Where(f=>f.UserId == id).Include(m=>m.Movie).ToListAsync();
+            return user;
+        }
     }
 }
