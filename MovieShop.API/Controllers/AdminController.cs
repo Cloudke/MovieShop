@@ -34,8 +34,8 @@ namespace MovieShop.API.Controllers
         [Route("movie")]
         public async Task<IActionResult> UpdateMovie(MovieCreateRequestModel request)
         {
-            var movie = await _movieService.GetAllPurchases();
-            return Ok(movie);
+            var movie = await _movieService.UpdateMovie(request);
+            return CreatedAtRoute("GetMovieById", new { id = movie.Id }, movie);
         }
 
         [HttpGet]

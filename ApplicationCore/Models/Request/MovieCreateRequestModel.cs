@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationCore.Models.Response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,11 @@ namespace ApplicationCore.Models.Request
 {
     public class MovieCreateRequestModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public decimal? Budget { get; set; }
-        public decimal Revenue { get; set; }
+        public decimal? Revenue { get; set; }
+
+        public List<GenreResponseModel> Genres { get; set; }
     }
 }

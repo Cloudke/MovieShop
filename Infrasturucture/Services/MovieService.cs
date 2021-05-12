@@ -203,10 +203,13 @@ namespace Infrastructure.Services
         {
             var createdMovie = await _movieRepository.AddAsync(new Movie {Title=request.Title,Budget=request.Budget,Revenue=request.Revenue });
 
-
             return new MovieDetailResponseModel {Id = createdMovie.Id,Title = createdMovie.Title,Budget=createdMovie.Budget,Revenue=request.Revenue };
         }
 
-
+        public async Task<MovieDetailResponseModel> UpdateMovie(MovieCreateRequestModel request)
+        {
+            var updatedMovie = await _movieRepository.UpdateAsync(new Movie {Id = request.Id, Title = request.Title, Budget = request.Budget, Revenue = request.Revenue });
+            return new MovieDetailResponseModel { Id = updatedMovie.Id, Title = updatedMovie.Title, Budget = updatedMovie.Budget, Revenue = updatedMovie.Revenue };
+        }
     }
 }
