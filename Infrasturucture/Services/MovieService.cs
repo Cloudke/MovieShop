@@ -191,7 +191,7 @@ namespace Infrastructure.Services
                 allMovies.Add(new MovieCardResponseModel
                 {
                     Id = movie.Movie.Id,
-                     Budget = movie.Movie.Budget,
+                    Budget = movie.Movie.Budget,
                     Title = movie.Movie.Title,
                     PosterUrl = movie.Movie.PosterUrl,
                 });

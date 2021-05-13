@@ -10,7 +10,7 @@ export class GenreService {
   constructor(private apiService: ApiService) {}
 
   getAllGenres(): Observable<Genre[]> {
-    // https://localhost:44385/api/Genres
+    // https://localhost:44387/api/Genres
     return this.apiService.getList('genres');
     // call getList() from Api Service
   }

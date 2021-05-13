@@ -41,6 +41,7 @@ namespace MovieShop.API.Controllers
         [Route("")]
         public async Task<IActionResult> GetAllUsers()
         {
+            //getlatest30users
             var user = await _userService.GetAllUsers();
             return Ok(user);
         }
