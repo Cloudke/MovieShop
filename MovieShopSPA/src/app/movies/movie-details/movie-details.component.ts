@@ -1,4 +1,7 @@
+import { MovieService } from 'src/app/core/services/movie.service';
 import { Component, OnInit } from '@angular/core';
+import { MovieDetail } from 'src/app/shared/models/movieDetail';
+
 
 @Component({
   selector: 'app-movie-details',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private movieService:MovieService) { }
+
+  movie:MovieDetail|undefined;
 
   ngOnInit(): void {
+    this.movieService.getMovieDetails(29).subscribe(
+      m=> {     
+        this.movie=m;
+      }
+      )
+
   }
 
 }

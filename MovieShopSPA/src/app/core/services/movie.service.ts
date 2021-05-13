@@ -14,7 +14,7 @@ export class MovieService {
   // Called by Movie Details Component
   getMovieDetails(id: number) {
 
-    this.apiService.getOne(`${'movies/'}`, id);
+   return this.apiService.getOne(`${'movies/'}`, id);
   }
 
   getTopRevenueMovies(): Observable<MovieCard[]> {

@@ -1,1 +1,79 @@
 <p>movie-details works!</p>
+
+<div>
+  <div class="row">
+    <img src="{{ movie?.backdropUrl }}" alt="{{ movie?.title }}" />
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <img src="{{ movie?.posterUrl }}" />
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <h1>{{ movie?.title }}</h1>
+      </div>
+      <div class="row">
+        <h5>{{ movie?.tagline }}</h5>
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="col">
+            {{ movie?.runTime }} m| {{ movie?.releaseDate }}
+          </div>
+
+          <div class="col" *ngFor="let genre of movie?.genres">
+            <a [routerLink]="['/genres/', genre.id]">{{ genre.name }}</a>
+          </div>
+        </div>
+        <div class="row">
+          <h3>{{ movie?.rating }}</h3>
+        </div>
+        <div class="row">{{ movie?.overview }}</div>
+      </div>
+    </div>
+    <div class="col">
+      <ul>
+        <li>
+          <button type="button" class="btn">REVIEW</button>
+        </li>
+        <li>
+          <button type="button" class="btn">Trailer</button>
+        </li>
+        <li>
+          <a class="btn"> BUY {{ movie?.price }} </a>
+        </li>
+        <li>
+          <a class="btn"> WATCH MOVIE </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Movie Facts</h3>
+      <hr />
+      <div>Release Date</div>
+      <div>Run Time</div>
+      <div>Box Office</div>
+      <div>Budget {{ movie?.budget }}</div>
+    </div>
+    <h3>Casts</h3>
+    <div class="col">
+      <div class="row" *ngFor="let cast of movie?.casts">
+        <div class="col">
+          <a [routerLink]="['/cast/', cast.id]">{{ cast.name }}</a>
+          <img
+            src="{{ cast.profilePath }}"
+            alt="{{ cast.name }}}  "
+            class="img-fluid"
+          />
+        </div>
+        <div class="col">{{ cast.name }}</div>
+        <!-- <div class="col">{{cast.}}</div> -->
+      </div>
+    </div>
+  </div>
+</div>
