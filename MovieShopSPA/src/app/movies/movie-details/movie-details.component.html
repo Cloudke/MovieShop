@@ -1,8 +1,14 @@
-<p>movie-details works!</p>
+<!-- <p>movie-details works!</p> -->
 
 <div>
   <div class="row">
-    <img src="{{ movie?.backdropUrl }}" alt="{{ movie?.title }}" />
+    <img
+      src="{{ movie?.backdropUrl }}"
+      alt="{{ movie?.title }}"
+      width="1550"
+      height="500"
+      class="bg"
+    />
   </div>
 
   <div class="row">
@@ -21,7 +27,8 @@
       <div>
         <div class="row">
           <div class="col">
-            {{ movie?.runTime }} m| {{ movie?.releaseDate }}
+            {{ movie?.runTime }} m |
+            {{ movie?.releaseDate?.toString()?.substring(0, 4) }}
           </div>
 
           <div class="col" *ngFor="let genre of movie?.genres">
@@ -34,13 +41,14 @@
         <div class="row">{{ movie?.overview }}</div>
       </div>
     </div>
+
     <div class="col">
-      <ul>
+      <ul style="list-style-type: none">
         <li>
-          <button type="button" class="btn">REVIEW</button>
+          <a type="button" class="btn">REVIEW</a>
         </li>
         <li>
-          <button type="button" class="btn">Trailer</button>
+          <a type="button" class="btn">Trailer</a>
         </li>
         <li>
           <a class="btn"> BUY {{ movie?.price }} </a>
@@ -55,24 +63,38 @@
     <div class="col">
       <h3>Movie Facts</h3>
       <hr />
-      <div>Release Date</div>
-      <div>Run Time</div>
-      <div>Box Office</div>
-      <div>Budget {{ movie?.budget }}</div>
+      <ul style="list-style-type: none">
+        <li class="far fa-calendar-alt">
+          Release Date: {{ movie?.releaseDate?.toString()?.substring(5, 7) }}/{{
+            movie?.releaseDate?.toString()?.substring(8, 10)
+          }}/{{ movie?.releaseDate?.toString()?.substring(0, 4) }}
+        </li>
+        <hr />
+        <li>Run Time {{ movie?.runTime }} mins</li>
+        <hr />
+        <li>Box Office ${{ movie?.revenue }}</li>
+        <hr />
+        <li>Budget ${{ movie?.budget }}</li>
+      </ul>
     </div>
-    <h3>Casts</h3>
+
     <div class="col">
+      <h3>Casts</h3>
+      <hr />
       <div class="row" *ngFor="let cast of movie?.casts">
+        <hr />
         <div class="col">
-          <a [routerLink]="['/cast/', cast.id]">{{ cast.name }}</a>
           <img
             src="{{ cast.profilePath }}"
             alt="{{ cast.name }}}  "
-            class="img-fluid"
+            width="120"
+            height="140"
+            style="border-radius: 50%"
           />
         </div>
-        <div class="col">{{ cast.name }}</div>
-        <!-- <div class="col">{{cast.}}</div> -->
+        <hr />
+        <a [routerLink]="['/cast/', cast.id]" class="col">{{ cast.name }}</a>
+        <div class="col">{{ cast.character }}</div>
       </div>
     </div>
   </div>

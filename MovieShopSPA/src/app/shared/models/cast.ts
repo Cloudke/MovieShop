@@ -5,4 +5,5 @@ export interface Cast {
     gender: string;
     tmdbUrl: string;
     profilePath: string;
+    character:string;
 }
