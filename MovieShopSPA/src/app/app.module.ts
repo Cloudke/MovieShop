@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-
+import {ActivatedRoute} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenresComponent } from './genres/genres.component';
 import { HeaderComponent } from './core/layout/header/header.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
-
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -21,6 +21,9 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { PurchasesComponent } from './user/purchases/purchases.component';
 import { FavoritesComponent } from './user/favorites/favorites.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+// import{faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
+
 
 @NgModule({
   declarations: [
@@ -39,13 +42,18 @@ import { MovieDetailsComponent } from './movies/movie-details/movie-details.comp
     NotFoundComponent,
     PurchasesComponent,
     FavoritesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    // FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

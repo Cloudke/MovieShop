@@ -1,5 +1,8 @@
 <!-- <p>movie-details works!</p> -->
-
+<script
+  src="https://kit.fontawesome.com/b2b1fc9a5a.js"
+  crossorigin="anonymous"
+></script>
 <div>
   <div class="row">
     <img
@@ -63,12 +66,18 @@
     <div class="col">
       <h3>Movie Facts</h3>
       <hr />
-      <ul style="list-style-type: none">
-        <li class="far fa-calendar-alt">
-          Release Date: {{ movie?.releaseDate?.toString()?.substring(5, 7) }}/{{
-            movie?.releaseDate?.toString()?.substring(8, 10)
-          }}/{{ movie?.releaseDate?.toString()?.substring(0, 4) }}
-        </li>
+      <ul>
+        <!-- <i class="far fa-calendar-alt"></i> -->
+
+        Release Date:
+        {{
+          movie?.releaseDate?.toString()?.substring(5, 7)
+        }}/{{
+          movie?.releaseDate?.toString()?.substring(8, 10)
+        }}/{{
+          movie?.releaseDate?.toString()?.substring(0, 4)
+        }}
+
         <hr />
         <li>Run Time {{ movie?.runTime }} mins</li>
         <hr />

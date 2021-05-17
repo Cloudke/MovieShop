@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+// import{faCalendarAlt} from'@fortawesome/free-solid-svg-icons';
 
 //@Component decorator will make any typescript class into Angular Component
 //return 'view'=>templateUrl: './app.component.html',
@@ -11,4 +11,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MovieShopSPA';
+  // faCalendarAlt = faCalendarAlt;
 }

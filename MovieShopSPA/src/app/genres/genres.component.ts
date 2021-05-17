@@ -21,7 +21,6 @@ export class GenresComponent implements OnInit {
       .subscribe(
         g => {
           this.genres = g;
-       //   console.table(this.genres);
         }
       )
 

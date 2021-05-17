@@ -1,22 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/core/services/movie.service';
 import { MovieCard } from 'src/app/shared/models/movieCard';
 
 @Component({
   selector: 'app-movie-card-list',
   templateUrl: './movie-card-list.component.html',
-  styleUrls: ['./movie-card-list.component.css']
+  styleUrls: ['./movie-card-list.component.css'],
 })
 export class MovieCardListComponent implements OnInit {
   movies: MovieCard[] | undefined;
-  constructor(private movieService: MovieService) { }
+  id?: number;
+
+  constructor(
+    private movieService: MovieService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.movieService.getMoviesByGenre(1).subscribe(
-      m => {
+    this.route.params.subscribe((params) => {
+      this.id = +params['id'];
+      this.movieService.getMoviesByGenre(this.id).subscribe((m) => {
         this.movies = m;
-      }
-    );
+      });
+    });
   }
-
 }

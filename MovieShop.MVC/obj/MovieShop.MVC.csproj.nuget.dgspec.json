@@ -63,9 +63,17 @@
               "target": "Package",
               "version": "[5.0.5, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.11.0, )"
+            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.11.0, )"
             }
           },
           "imports": [
@@ -154,9 +162,17 @@
               "target": "Package",
               "version": "[5.0.5, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.11.0, )"
+            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.11.0, )"
             }
           },
           "imports": [
@@ -247,6 +263,10 @@
               "target": "Package",
               "version": "[5.0.5, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.11.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
@@ -254,6 +274,10 @@
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.11.0, )"
             }
           },
           "imports": [
